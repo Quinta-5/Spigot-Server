@@ -288,6 +288,7 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
     // CraftBukkit end
 
     public void tick() {
+        org.bukkit.craftbukkit.SpigotTimings.playerConnectionTimer.startTiming(); // Spigot
         this.resetPosition();
         this.player.xo = this.player.getX();
         this.player.yo = this.player.getY();
@@ -363,6 +364,7 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
             this.player.resetLastActionTime(); // CraftBukkit - SPIGOT-854
             this.disconnect(new ChatMessage("multiplayer.disconnect.idling"));
         }
+        org.bukkit.craftbukkit.SpigotTimings.playerConnectionTimer.stopTiming(); // Spigot
 
     }
 
@@ -1891,6 +1893,7 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
     // CraftBukkit end
 
     private void handleCommand(String s) {
+        org.bukkit.craftbukkit.SpigotTimings.playerCommandTimer.startTiming(); // Spigot
         // CraftBukkit start - whole method
         this.LOGGER.info(this.player.getScoreboardName() + " issued server command: " + s);
 
@@ -1900,6 +1903,7 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
         this.cserver.getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
+            org.bukkit.craftbukkit.SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
             return;
         }
 
@@ -1911,6 +1915,8 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
             player.sendMessage(org.bukkit.ChatColor.RED + "An internal error occurred while attempting to perform this command");
             java.util.logging.Logger.getLogger(PlayerConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             return;
+        } finally {
+            org.bukkit.craftbukkit.SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
         }
         // this.server.getCommands().performCommand(this.player.createCommandSourceStack(), s);
         // CraftBukkit end
