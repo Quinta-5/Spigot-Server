@@ -252,8 +252,8 @@ public class WorldServer extends World implements GeneratorAccessSeed {
 
         this.entityManager = new PersistentEntitySectionManager<>(Entity.class, new WorldServer.a(), entitypersistentstorage);
         DefinedStructureManager definedstructuremanager = minecraftserver.getStructureManager();
-        int j = minecraftserver.getPlayerList().getViewDistance();
-        int k = minecraftserver.getPlayerList().getSimulationDistance();
+        int j = this.spigotConfig.viewDistance; // Spigot
+        int k = this.spigotConfig.simulationDistance; // Spigot
         PersistentEntitySectionManager persistententitysectionmanager = this.entityManager;
 
         Objects.requireNonNull(this.entityManager);

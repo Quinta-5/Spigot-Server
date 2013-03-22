@@ -1497,7 +1497,7 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
         BlockPosition blockposition = movingobjectpositionblock.getBlockPos();
         Vec3D vec3d1 = vec3d.subtract(Vec3D.atCenterOf(blockposition));
 
-        if (this.player.level.getServer() != null && this.player.chunkPosition().getChessboardDistance(new ChunkCoordIntPair(blockposition)) < this.player.level.getServer().getPlayerList().getViewDistance()) {
+        if (this.player.level.getServer() != null && this.player.chunkPosition().getChessboardDistance(new ChunkCoordIntPair(blockposition)) < this.player.level.spigotConfig.viewDistance) { // Spigot
             double d0 = 1.0000001D;
 
             if (Math.abs(vec3d1.x()) < 1.0000001D && Math.abs(vec3d1.y()) < 1.0000001D && Math.abs(vec3d1.z()) < 1.0000001D) {
