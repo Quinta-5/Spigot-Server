@@ -579,7 +579,7 @@ public abstract class PlayerList {
             event.disallow(PlayerLoginEvent.Result.KICK_BANNED, CraftChatMessage.fromComponent(chatmessage));
         } else if (!this.isWhiteListed(gameprofile)) {
             chatmessage = new ChatMessage("multiplayer.disconnect.not_whitelisted");
-            event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, CraftChatMessage.fromComponent(chatmessage));
+            event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, org.spigotmc.SpigotConfig.whitelistMessage); // Spigot
         } else if (getIpBans().isBanned(socketaddress) && !getIpBans().get(socketaddress).hasExpired()) {
             IpBanEntry ipbanentry = this.ipBans.get(socketaddress);
 
@@ -593,7 +593,7 @@ public abstract class PlayerList {
         } else {
             // return this.players.size() >= this.maxPlayers && !this.canBypassPlayerLimit(gameprofile) ? new ChatMessage("multiplayer.disconnect.server_full") : null;
             if (this.players.size() >= this.maxPlayers && !this.canBypassPlayerLimit(gameprofile)) {
-                event.disallow(PlayerLoginEvent.Result.KICK_FULL, "The server is full");
+                event.disallow(PlayerLoginEvent.Result.KICK_FULL, org.spigotmc.SpigotConfig.serverFullMessage); // Spigot
             }
         }
 

@@ -74,9 +74,9 @@ public class HandshakeListener implements PacketHandshakingInListener {
                     ChatMessage chatmessage;
 
                     if (packethandshakinginsetprotocol.getProtocolVersion() < 754) {
-                        chatmessage = new ChatMessage("multiplayer.disconnect.outdated_client", new Object[]{SharedConstants.getCurrentVersion().getName()});
+                        chatmessage = new ChatMessage( java.text.MessageFormat.format( org.spigotmc.SpigotConfig.outdatedClientMessage.replaceAll("'", "''"), SharedConstants.getCurrentVersion().getName() ) ); // Spigot
                     } else {
-                        chatmessage = new ChatMessage("multiplayer.disconnect.incompatible", new Object[]{SharedConstants.getCurrentVersion().getName()});
+                        chatmessage = new ChatMessage( java.text.MessageFormat.format( org.spigotmc.SpigotConfig.outdatedServerMessage.replaceAll("'", "''"), SharedConstants.getCurrentVersion().getName() ) ); // Spigot
                     }
 
                     this.connection.send(new PacketLoginOutDisconnect(chatmessage));
