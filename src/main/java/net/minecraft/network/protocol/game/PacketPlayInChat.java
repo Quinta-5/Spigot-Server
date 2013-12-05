@@ -25,7 +25,24 @@ public class PacketPlayInChat implements Packet<PacketListenerPlayIn> {
         packetdataserializer.writeUtf(this.message);
     }
 
-    public void handle(PacketListenerPlayIn packetlistenerplayin) {
+    // Spigot Start
+    private static final java.util.concurrent.ExecutorService executors = java.util.concurrent.Executors.newCachedThreadPool(
+            new com.google.common.util.concurrent.ThreadFactoryBuilder().setDaemon( true ).setNameFormat( "Async Chat Thread - #%d" ).build() );
+    public void handle(final PacketListenerPlayIn packetlistenerplayin) {
+        if ( !message.startsWith("/") )
+        {
+            executors.submit( new Runnable()
+            {
+
+                @Override
+                public void run()
+                {
+                    packetlistenerplayin.handleChat( PacketPlayInChat.this );
+                }
+            } );
+            return;
+        }
+        // Spigot End
         packetlistenerplayin.handleChat(this);
     }
 
