@@ -1801,9 +1801,20 @@ public class PlayerConnection implements ServerPlayerConnection, PacketListenerP
                 }, ChatMessageType.CHAT, this.player.getUUID());
             }
 
+            // Spigot start - spam exclusions
+            boolean counted = true;
+            for ( String exclude : org.spigotmc.SpigotConfig.spamExclusions )
+            {
+                if ( exclude != null && s.startsWith( exclude ) )
+                {
+                    counted = false;
+                    break;
+                }
+            }
+            // Spigot end
             // CraftBukkit start - replaced with thread safe throttle
             // this.chatSpamTickCount += 20;
-            if (chatSpamTickCount.addAndGet(20) > 200 && !this.server.getPlayerList().isOp(this.player.getGameProfile())) {
+            if (counted && chatSpamTickCount.addAndGet(20) > 200 && !this.server.getPlayerList().isOp(this.player.getGameProfile())) { // Spigot
                 if (!isSync) {
                     Waitable waitable = new Waitable() {
                         @Override
