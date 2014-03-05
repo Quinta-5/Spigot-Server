@@ -465,6 +465,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper {
     private static IInventory getContainerAt(World world, double d0, double d1, double d2) {
         Object object = null;
         BlockPosition blockposition = new BlockPosition(d0, d1, d2);
+        if ( !world.hasChunkAt( blockposition ) ) return null; // Spigot
         IBlockData iblockdata = world.getBlockState(blockposition);
         Block block = iblockdata.getBlock();
 
