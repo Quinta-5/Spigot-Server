@@ -1231,6 +1231,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.e {
     }
 
     protected void addEntity(Entity entity) {
+        org.spigotmc.AsyncCatcher.catchOp("entity track"); // Spigot
         if (!(entity instanceof EntityComplexPart)) {
             EntityTypes<?> entitytypes = entity.getType();
             int i = entitytypes.clientTrackingRange() * 16;
@@ -1266,6 +1267,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.e {
     }
 
     protected void removeEntity(Entity entity) {
+        org.spigotmc.AsyncCatcher.catchOp("entity untrack"); // Spigot
         if (entity instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entity;
 
@@ -1485,6 +1487,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.e {
         }
 
         public void removePlayer(EntityPlayer entityplayer) {
+            org.spigotmc.AsyncCatcher.catchOp("player tracker clear"); // Spigot
             if (this.seenBy.remove(entityplayer.connection)) {
                 this.serverEntity.removePairing(entityplayer);
             }
@@ -1492,6 +1495,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.e {
         }
 
         public void updatePlayer(EntityPlayer entityplayer) {
+            org.spigotmc.AsyncCatcher.catchOp("player tracker update"); // Spigot
             if (entityplayer != this.entity) {
                 Vec3D vec3d = entityplayer.position().subtract(this.entity.position()); // MC-155077, SPIGOT-5113
                 double d0 = (double) Math.min(this.getEffectiveRange(), (PlayerChunkMap.this.viewDistance - 1) * 16);
