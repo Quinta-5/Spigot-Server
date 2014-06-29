@@ -8,12 +8,14 @@ import net.minecraft.world.EnumHand;
 public class PacketPlayInBlockPlace implements Packet<PacketListenerPlayIn> {
 
     private final EnumHand hand;
+    public long timestamp; // Spigot
 
     public PacketPlayInBlockPlace(EnumHand enumhand) {
         this.hand = enumhand;
     }
 
     public PacketPlayInBlockPlace(PacketDataSerializer packetdataserializer) {
+        this.timestamp = System.currentTimeMillis(); // Spigot
         this.hand = (EnumHand) packetdataserializer.readEnum(EnumHand.class);
     }
 
