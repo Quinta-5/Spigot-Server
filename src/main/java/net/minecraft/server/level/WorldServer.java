@@ -245,6 +245,7 @@ public class WorldServer extends World implements GeneratorAccessSeed {
         if (gen != null) {
             chunkgenerator = new org.bukkit.craftbukkit.generator.CustomChunkGenerator(this, chunkgenerator, gen);
         }
+        chunkgenerator.conf = spigotConfig; // Spigot
         // CraftBukkit end
         chunkgenerator.ensureStructuresGenerated();
         boolean flag2 = minecraftserver.forceSynchronousWrites();
