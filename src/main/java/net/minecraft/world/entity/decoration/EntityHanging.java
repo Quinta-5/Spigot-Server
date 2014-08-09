@@ -117,7 +117,7 @@ public abstract class EntityHanging extends Entity {
     public void tick() {
         if (!this.level.isClientSide) {
             this.checkOutOfWorld();
-            if (this.checkInterval++ == 100) {
+            if (this.checkInterval++ == this.level.spigotConfig.hangingTickFrequency) { // Spigot
                 this.checkInterval = 0;
                 if (!this.isRemoved() && !this.survives()) {
                     // CraftBukkit start - fire break events
