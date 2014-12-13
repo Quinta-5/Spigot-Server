@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.Packet;
 public class PacketPlayOutChat implements Packet<PacketListenerPlayOut> {
 
     private final IChatBaseComponent message;
+    public net.md_5.bungee.api.chat.BaseComponent[] components; // Spigot
     private final ChatMessageType type;
     private final UUID sender;
 
@@ -27,7 +28,13 @@ public class PacketPlayOutChat implements Packet<PacketListenerPlayOut> {
 
     @Override
     public void write(PacketDataSerializer packetdataserializer) {
-        packetdataserializer.writeComponent(this.message);
+        // Spigot start
+        if (components != null) {
+            packetdataserializer.writeUtf(net.md_5.bungee.chat.ComponentSerializer.toString(components));
+        } else {
+            packetdataserializer.writeComponent(this.message);
+        }
+        // Spigot end
         packetdataserializer.writeByte(this.type.getIndex());
         packetdataserializer.writeUUID(this.sender);
     }
