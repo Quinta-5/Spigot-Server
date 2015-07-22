@@ -415,6 +415,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
                 } else if (this.getPacketListener() != null) {
                     this.getPacketListener().onDisconnect(new ChatMessage("multiplayer.disconnect.generic"));
                 }
+                this.queue.clear(); // Free up packet queue.
             }
 
         }
