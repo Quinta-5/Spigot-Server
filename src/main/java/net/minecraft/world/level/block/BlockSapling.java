@@ -42,7 +42,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 
     @Override
     public void randomTick(IBlockData iblockdata, WorldServer worldserver, BlockPosition blockposition, Random random) {
-        if (worldserver.getMaxLocalRawBrightness(blockposition.above()) >= 9 && random.nextInt(7) == 0) {
+        if (worldserver.getMaxLocalRawBrightness(blockposition.above()) >= 9 && random.nextInt(Math.max(2, (int) (((100.0F / worldserver.spigotConfig.saplingModifier) * 7) + 0.5F))) == 0) { // Spigot
             // CraftBukkit start
             worldserver.captureTreeGeneration = true;
             // CraftBukkit end

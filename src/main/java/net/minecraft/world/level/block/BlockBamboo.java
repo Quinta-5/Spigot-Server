@@ -132,7 +132,7 @@ public class BlockBamboo extends Block implements IBlockFragilePlantElement {
     @Override
     public void randomTick(IBlockData iblockdata, WorldServer worldserver, BlockPosition blockposition, Random random) {
         if ((Integer) iblockdata.getValue(BlockBamboo.STAGE) == 0) {
-            if (random.nextInt(3) == 0 && worldserver.isEmptyBlock(blockposition.above()) && worldserver.getRawBrightness(blockposition.above(), 0) >= 9) {
+            if (random.nextInt(Math.max(1, (int) (100.0F / worldserver.spigotConfig.bambooModifier) * 3)) == 0 && worldserver.isEmptyBlock(blockposition.above()) && worldserver.getRawBrightness(blockposition.above(), 0) >= 9) { // Spigot
                 int i = this.getHeightBelowUpToMax(worldserver, blockposition) + 1;
 
                 if (i < 16) {
