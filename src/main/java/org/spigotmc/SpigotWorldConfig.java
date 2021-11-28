@@ -378,4 +378,9 @@ public class SpigotWorldConfig
     {
         thunderChance = getInt("thunder-chance", 100000);
     }
+
+    public boolean belowZeroGenerationInExistingChunks;
+    private void belowZeroGenerationInExistingChunks() {
+        belowZeroGenerationInExistingChunks = getBoolean("below-zero-generation-in-existing-chunks", true);
+    }
 }
